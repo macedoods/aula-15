@@ -49,6 +49,11 @@
         .btn-animated:active {
             transform: scale(0.98);
         }
+
+        /* Estilo para o botão de filtro ativo */
+        .active-filter {
+            background-color: #dc2626 !important; /* red-600 */
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 antialiased">
@@ -70,9 +75,15 @@
         </nav>
     </header>
 
-    <section class="relative bg-cover bg-center h-screen" style="background-image: url('https://images.unsplash.com/photo-1555529771-835f59ee5020?q=80&w=1974&auto=format&fit=crop');">
-        <div class="absolute inset-0 bg-black opacity-60"></div>
-        <div class="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center relative z-10">
+    <section class="relative h-screen overflow-hidden">
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="/assets/videos/New City Sedan, sua nova experiência de direção.mp4" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+
+        <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
+        
+        <div class="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center relative z-20">
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-white mb-4 drop-shadow-lg">
                 Sua jornada começa aqui.
             </h1>
@@ -87,8 +98,30 @@
 
     <main id="models" class="container mx-auto px-6 py-16">
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">Nossa Coleção de Veículos</h2>
+        
+        <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8">
+            <button class="filter-btn px-6 py-2 rounded-full text-white font-semibold transition-colors duration-300 bg-red-600 hover:bg-red-700 active-filter" data-filter="all">
+                Todos
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full text-white font-semibold transition-colors duration-300 bg-gray-700 hover:bg-gray-600" data-filter="Sedan">
+                Sedan
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full text-white font-semibold transition-colors duration-300 bg-gray-700 hover:bg-gray-600" data-filter="SUV">
+                SUV
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full text-white font-semibold transition-colors duration-300 bg-gray-700 hover:bg-gray-600" data-filter="Hatchback">
+                Hatchback
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full text-white font-semibold transition-colors duration-300 bg-gray-700 hover:bg-gray-600" data-filter="Híbrido">
+                Híbrido
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full text-white font-semibold transition-colors duration-300 bg-gray-700 hover:bg-gray-600" data-filter="Caminhonete">
+                Caminhonete
+            </button>
+        </div>
+
         <div id="car-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            </div>
+        </div>
     </main>
 
     <section id="about" class="bg-gray-800 py-16">
@@ -139,7 +172,7 @@
                 </svg>
             </button>
             <div id="modal-content">
-                </div>
+            </div>
         </div>
     </div>
 
@@ -307,8 +340,9 @@
         }
 
         // Função para renderizar a galeria de carros
-        function renderCars() {
-            carsData.forEach(car => {
+        function renderCars(carsToRender) {
+            carGallery.innerHTML = ''; // Limpa a galeria
+            carsToRender.forEach(car => {
                 const card = createCarCard(car);
                 carGallery.appendChild(card);
             });
@@ -362,28 +396,67 @@
 
         // Adiciona listeners
         function addEventListeners() {
-            document.querySelectorAll('.view-details-btn').forEach(button => {
+            // Event listener para os botões de filtro
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
                 button.addEventListener('click', (event) => {
-                    const carId = parseInt(event.target.getAttribute('data-car-id'));
-                    const selectedCar = carsData.find(car => car.id === carId);
-                    if (selectedCar) {
-                        showCarDetails(selectedCar);
+                    // Remove a classe 'active-filter' e suas cores de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active-filter', 'bg-red-600', 'hover:bg-red-700'));
+                    // Adiciona a classe 'active-filter' e as cores do botão vermelho ao botão clicado
+                    event.currentTarget.classList.add('active-filter', 'bg-red-600', 'hover:bg-red-700');
+
+                    // Adiciona as classes de cor cinza aos outros botões
+                    filterButtons.forEach(btn => {
+                        if (!btn.classList.contains('active-filter')) {
+                            btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                        } else {
+                            btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        }
+                    });
+
+                    const filterValue = event.currentTarget.getAttribute('data-filter');
+                    let filteredCars = [];
+
+                    if (filterValue === 'all') {
+                        filteredCars = carsData;
+                    } else {
+                        filteredCars = carsData.filter(car => car.model === filterValue);
                     }
+
+                    renderCars(filteredCars);
+                    // Re-adiciona os listeners para os novos botões "Ver Detalhes"
+                    addCarDetailsListeners();
                 });
             });
 
+            function addCarDetailsListeners() {
+                document.querySelectorAll('.view-details-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const carId = parseInt(event.target.getAttribute('data-car-id'));
+                        const selectedCar = carsData.find(car => car.id === carId);
+                        if (selectedCar) {
+                            showCarDetails(selectedCar);
+                        }
+                    });
+                });
+            }
+
+            // Listener para o botão de fechar do modal
             closeModalButton.addEventListener('click', closeModal);
             carModal.addEventListener('click', (event) => {
                 if (event.target === carModal) {
                     closeModal();
                 }
             });
+
+            // Chama a função para adicionar listeners de detalhes após a renderização inicial
+            addCarDetailsListeners();
         }
 
         // Inicializa a aplicação
         document.addEventListener('DOMContentLoaded', () => {
-            renderCars();
-            addEventListeners();
+            renderCars(carsData); // Renderiza todos os carros inicialmente
+            addEventListeners(); // Adiciona os listeners de eventos
         });
     </script>
 
