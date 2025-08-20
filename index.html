@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honda Motors Elite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Um azul marinho escuro para um visual sofisticado */
+            color: #f1f5f9; /* Branco suave */
+            scroll-behavior: smooth;
+        }
+
+        /* ===== NOVAS ANIMAÇÕES PARA OS BOTÕES ===== */
+        .btn-animated {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s ease-in-out;
+            background-size: 200% 200%;
+            background-image: linear-gradient(45deg, #e53935, #c62828, #b71c1c);
+        }
+
+        .btn-animated:hover {
+            background-position: right center; /* Anima o gradiente */
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.25);
+        }
+        
+        /* Ícone de seta para os botões principais */
+        .btn-animated .btn-icon {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease-in-out;
+            margin-left: 0.25rem;
+        }
+
+        .btn-animated:hover .btn-icon {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Efeito de "ripple" (onda) ao clicar */
+        .btn-animated:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 antialiased">
+
+    <header class="bg-gray-800/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 16H9v-5H6l6-8 6 8h-3v5h-2v-5h-2v5z"/>
+                </svg>
+                <span>Honda Motors Elite</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">Início</a>
+                <a href="#models" class="text-gray-300 hover:text-white transition-colors duration-300">Modelos</a>
+                <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300">Sobre Nós</a>
+                <a href="#contact" class="px-5 py-2 btn-animated rounded-full text-white font-semibold">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="relative bg-cover bg-center h-screen" style="background-image: url('https://images.unsplash.com/photo-1555529771-835f59ee5020?q=80&w=1974&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center relative z-10">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-white mb-4 drop-shadow-lg">
+                Sua jornada começa aqui.
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl drop-shadow-lg">
+                Explore a excelência em engenharia e design. Descubra a linha completa de veículos Honda.
+            </p>
+            <a href="#models" class="inline-flex items-center px-8 py-3 btn-animated rounded-full text-white text-lg font-semibold shadow-xl">
+                Ver Modelos <span class="btn-icon">→</span>
+            </a>
+        </div>
+    </section>
+
+    <main id="models" class="container mx-auto px-6 py-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">Nossa Coleção de Veículos</h2>
+        <div id="car-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            </div>
+    </main>
+
+    <section id="about" class="bg-gray-800 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-white">Paixão por Inovação</h2>
+            <p class="max-w-3xl mx-auto text-gray-300 text-lg">
+                Na Honda Motors Elite, somos movidos pela paixão em oferecer veículos que superam expectativas. Com tecnologia de ponta, segurança e um design inconfundível, cada Honda é uma promessa de uma experiência de condução superior.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-white">Entre em Contato</h2>
+            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
+                <form>
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Nome Completo</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors" placeholder="Seu nome">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors" placeholder="seuemail@exemplo.com">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-300 text-sm font-semibold mb-2">Mensagem</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors" placeholder="Sua mensagem..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 btn-animated rounded-lg text-white font-semibold shadow-lg">
+                        Enviar Mensagem <span class="btn-icon">→</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 py-8 text-center text-gray-400">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Honda Motors Elite. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="car-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden items-center justify-center p-4">
+        <div class="relative bg-gray-800 rounded-xl max-w-4xl w-full max-h-full overflow-y-auto shadow-2xl p-6 md:p-10 transform scale-95 transition-transform duration-300">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div id="modal-content">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos carros (mínimo de 12)
+        const carsData = [
+            {
+                id: 1,
+                name: 'Honda Civic Sedan',
+                model: 'Sedan',
+                price: 'R$ 130.000',
+                image: 'https://p2.trrsf.com/image/fget/cf/1200/630/middle/images.terra.com/2019/10/23/lx-1.jpg',
+                description: 'Um ícone de design e tecnologia, com um desempenho que inspira.',
+                details: [
+                    'Motor: 2.0L i-VTEC', 'Potência: 155 cv', 'Transmissão: CVT', 'Consumo (urbano/estrada): 11.5 km/l / 14.6 km/l', 'Câmera de ré com 3 ângulos'
+                ]
+            },
+            {
+                id: 2,
+                name: 'Honda CR-V',
+                model: 'SUV',
+                price: 'R$ 250.000',
+                image: 'https://i.pinimg.com/736x/31/7c/6d/317c6d8612207f4b2b76a28f800df86b.jpg',
+                description: 'O SUV que combina espaço, conforto e a segurança que sua família merece.',
+                details: [
+                    'Motor: 1.5L VTC Turbo', 'Potência: 190 cv', 'Transmissão: CVT', 'Consumo (urbano/estrada): 10.4 km/l / 12.0 km/l', 'Honda Sensing™'
+                ]
+            },
+            {
+                id: 3,
+                name: 'Honda HR-V',
+                model: 'SUV',
+                price: 'R$ 150.000',
+                image: 'https://www.comprecar.com.br/storage/news/featured/j916KoRjjA9_9CR.jpg',
+                description: 'Design robusto com a versatilidade e a praticidade para o seu dia a dia.',
+                details: [
+                    'Motor: 1.5L Flex', 'Potência: 126 cv', 'Transmissão: CVT', 'Consumo (urbano/estrada): 12.7 km/l / 13.9 km/l', 'Magic Seat®'
+                ]
+            },
+            {
+                id: 4,
+                name: 'Honda City Sedan',
+                model: 'Sedan',
+                price: 'R$ 115.000',
+                image: 'https://s2-autoesporte.glbimg.com/VpchDQw6R6e7LOtuCnaFT75h3P4=/0x0:5307x3436/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/R/B/KQAWP7TLm96wmKIGmR1g/5f8a2810b-0.jpg',
+                description: 'Compacto por fora, espaçoso por dentro. Elegância e eficiência em um só carro.',
+                details: [
+                    'Motor: 1.5L Flex', 'Potência: 126 cv', 'Transmissão: CVT', 'Consumo (urbano/estrada): 13.1 km/l / 15.2 km/l', 'Painel digital'
+                ]
+            },
+            {
+                id: 5,
+                name: 'Honda City Hatchback',
+                model: 'Hatchback',
+                price: 'R$ 120.000',
+                image: 'https://www.honda.com.br/automoveis/sites/hab/files/2024-10/imagem-preto-slider_1920x1024.webp',
+                description: 'A versatilidade do hatch combinada com o design moderno e tecnologia do City.',
+                details: [
+                    'Motor: 1.5L Flex', 'Potência: 126 cv', 'Transmissão: CVT', 'Consumo (urbano/estrada): 12.3 km/l / 14.1 km/l', 'Sistema de áudio premium'
+                ]
+            },
+            {
+                id: 6,
+                name: 'Honda ZR-V',
+                model: 'SUV',
+                price: 'R$ 215.000',
+                image: 'https://global.honda/content/dam/site/global-en/newsroom-new/cq_img/news/2022-new/11/4221117eng-zr-v_01.jpg',
+                description: 'O novo SUV que redefine a categoria com um design premium e tecnologia inteligente.',
+                details: [
+                    'Motor: 2.0L i-VTEC', 'Potência: 161 cv', 'Transmissão: CVT', 'Consumo (urbano/estrada): 10.2 km/l / 12.8 km/l', 'Design aerodinâmico'
+                ]
+            },
+            {
+                id: 7,
+                name: 'Honda WR-V',
+                model: 'SUV',
+                price: 'R$ 105.000',
+                image: 'https://s2-autoesporte.glbimg.com/7LqqS6jMZgiNh-ubXUeMOWSGWrQ=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/V/I/QlBDdwQ1qpyGZRmaavJA/2017-01-31-honda-wr-v-dianteira.jpg',
+                description: 'Um crossover compacto e robusto, perfeito para enfrentar os desafios da cidade.',
+                details: [
+                    'Motor: 1.5L FlexOne', 'Potência: 116 cv', 'Transmissão: CVT', 'Consumo (urbano/estrada): 11.7 km/l / 12.4 km/l', 'Design aventureiro'
+                ]
+            },
+            {
+                id: 8,
+                name: 'Honda Pilot',
+                model: 'SUV',
+                price: 'R$ 350.000',
+                image: 'https://hips.hearstapps.com/hmg-prod/images/08-2023-honda-pilot-elite-1667596799.jpg?crop=0.718xw:0.535xh;0.146xw,0.294xh&resize=640:*',
+                description: 'Espaço, conforto e segurança para toda a família em um SUV imponente.',
+                details: [
+                    'Motor: 3.5L V6', 'Potência: 280 cv', 'Transmissão: Automática de 9 marchas', 'Capacidade: 8 passageiros', 'Sistema de tração integral'
+                ]
+            },
+            {
+                id: 9,
+                name: 'Honda Passport',
+                model: 'SUV',
+                price: 'R$ 310.000',
+                image: 'https://uploads.automaistv.com.br/2024/11/honda_passport_trailsport_76_edited-jpg.webp',
+                description: 'Aventura e conforto se unem em um SUV robusto e pronto para qualquer terreno.',
+                details: [
+                    'Motor: 3.5L V6', 'Potência: 280 cv', 'Transmissão: Automática de 9 marchas', 'Tração: i-VTM4™ AWD', 'Design off-road'
+                ]
+            },
+            {
+                id: 10,
+                name: 'Honda Ridgeline',
+                model: 'Caminhonete',
+                price: 'R$ 330.000',
+                image: 'https://i.pinimg.com/736x/26/ac/48/26ac48aac54d8316f33382c90d203b55.jpg',
+                description: 'A única picape que combina a versatilidade de uma caçamba com o conforto de um SUV.',
+                details: [
+                    'Motor: 3.5L V6', 'Potência: 280 cv', 'Transmissão: Automática de 9 marchas', 'Caçamba: 1.6m de comprimento', 'In-Bed Trunk®'
+                ]
+            },
+            {
+                id: 11,
+                name: 'Honda Accord e:HEV',
+                model: 'Híbrido',
+                price: 'R$ 300.000',
+                image: 'https://cdn.motor1.com/images/mgl/ZorJN/s1/honda-accord-e-hev-hibrido.webp',
+                description: 'A perfeição da engenharia híbrida. Conforto, potência e extrema economia de combustível.',
+                details: [
+                    'Motor: 2.0L i-VTEC + Elétrico', 'Potência: 212 cv', 'Transmissão: E-CVT', 'Consumo (urbano): 17.6 km/l', 'Tecnologia e:HEV'
+                ]
+            },
+            {
+                id: 12,
+                name: 'Honda Civic e:HEV',
+                model: 'Híbrido',
+                price: 'R$ 250.000',
+                image: 'https://honda-automoveis.pt/www/uploads/carros/civic2022/THUMBS-1000x550-CROP-CENTER/imagem-3.png',
+                description: 'O futuro já chegou. O Civic híbrido oferece uma experiência de condução suave e eficiente.',
+                details: [
+                    'Motor: 2.0L Híbrido', 'Potência: 184 cv', 'Transmissão: E-CVT', 'Consumo (urbano/estrada): 18.3 km/l / 15.9 km/l', 'Freios regenerativos'
+                ]
+            }
+        ];
+
+        // Referências aos elementos do DOM
+        const carGallery = document.getElementById('car-gallery');
+        const carModal = document.getElementById('car-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        // Função para criar o HTML de um cartão de carro
+        function createCarCard(car) {
+            const card = document.createElement('div');
+            card.className = 'bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden';
+            card.innerHTML = `
+                <img src="${car.image}" alt="${car.name}" class="w-full h-48 object-cover object-center">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">${car.name}</h3>
+                    <p class="text-gray-400 text-sm mb-4">${car.description}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-red-500 font-bold text-lg">${car.price}</span>
+                        <button class="view-details-btn px-4 py-2 bg-red-600 text-white rounded-full text-sm font-semibold hover:bg-red-700 transition-colors duration-300" data-car-id="${car.id}">
+                            Ver Detalhes
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Função para renderizar a galeria de carros
+        function renderCars() {
+            carsData.forEach(car => {
+                const card = createCarCard(car);
+                carGallery.appendChild(card);
+            });
+        }
+
+        // Função para mostrar o modal com os detalhes do carro
+        function showCarDetails(car) {
+            const detailsList = car.details.map(detail => `
+                <li class="flex items-start mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-3 mt-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                    <span class="text-gray-300">${detail}</span>
+                </li>
+            `).join('');
+
+            modalContent.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="md:col-span-1">
+                        <img src="${car.image}" alt="${car.name}" class="w-full rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:col-span-1">
+                        <h2 class="text-3xl font-bold text-white mb-2">${car.name}</h2>
+                        <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full uppercase">${car.model}</span>
+                        <p class="text-2xl font-semibold text-red-500 my-4">${car.price}</p>
+                        <p class="text-gray-300 mb-6">${car.description}</p>
+                        
+                        <h4 class="text-xl font-semibold text-white mb-2">Especificações:</h4>
+                        <ul class="list-none">
+                            ${detailsList}
+                        </ul>
+                        
+                        <a href="#contact" class="mt-8 inline-flex items-center justify-center w-full px-6 py-3 btn-animated rounded-full text-white font-semibold shadow-lg text-center">
+                            Agendar Test Drive <span class="btn-icon">→</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+            carModal.classList.remove('hidden');
+            carModal.classList.add('flex');
+            // Animação de entrada do modal
+            setTimeout(() => carModal.querySelector('.transform').classList.remove('scale-95'), 10);
+        }
+
+        // Função para fechar o modal
+        function closeModal() {
+            carModal.querySelector('.transform').classList.add('scale-95');
+            setTimeout(() => {
+                carModal.classList.add('hidden');
+                carModal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Adiciona listeners
+        function addEventListeners() {
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const carId = parseInt(event.target.getAttribute('data-car-id'));
+                    const selectedCar = carsData.find(car => car.id === carId);
+                    if (selectedCar) {
+                        showCarDetails(selectedCar);
+                    }
+                });
+            });
+
+            closeModalButton.addEventListener('click', closeModal);
+            carModal.addEventListener('click', (event) => {
+                if (event.target === carModal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // Inicializa a aplicação
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCars();
+            addEventListeners();
+        });
+    </script>
+
+</body>
+</html>
